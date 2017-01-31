@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="run" name="Shop" xmlns:ivy="antlib:org.apache.ivy.ant">
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="java.target" value="1.8" />
+	<property name="java.source" value="1.8" />
+	<property name="src.dir" value="src" />
+	<property name="main.class" value="ukma.group.shop.main.Main" />
+	<property name="lib.dir" value="lib" />
+	<property name="build.dir" value="build" />
+	<property name="classes.dir" value="${build.dir}/classes"/>
+
+	<property name="jar.dir" value="${build.dir}/jar"/>
+	<property name="jar.name" value="Shop.jar"/>
+
+	<property name="ivy.version" value="2.4.0-rc1" />
+	<property name="ivy.dir" value="${lib.dir}" />
+	<available file="${ivy.dir}/ivy.jar" property="ivy.jar.present" />
+
+	<target name="install-ivy" unless="ivy.jar.present">
+		<mkdir dir="${ivy.dir}" />
+		<get src="http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/${ivy.version}/ivy-${ivy.version}.jar" dest="${ivy.dir}/ivy.jar" />
+	</target>
+
+	<target name="load-ivy" depends="install-ivy">
+		<path id="ivy.lib.path">
+			<fileset dir="${ivy.dir}" includes="ivy.jar" />
+		</path>
+		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path" />
+	</target>
+	
+	<path id="classpath">
+		<fileset dir="${classes.dir}"/>
+		<fileset dir="${lib.dir}"/>
+	</path>
+
+	<target name="resolve" depends="load-ivy">
+		<mkdir dir="${lib.dir}"/>
+		<ivy:retrieve sync="true" pattern="${lib.dir}/[artifact]-[type]-[revision].[ext]"/>
+	</target>
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+		<delete dir="${lib.dir}" />
+	</target>
+
+	<target name="compile">
+		<mkdir dir="${classes.dir}" />
+		<javac debug="true" debuglevel="${debuglevel}" srcdir="${src.dir}" destdir="${classes.dir}" 
+			includeantruntime="false" source="${java.source}" target="${java.target}" classpathref="classpath" />
+	</target>
+
+	<target name="build-jar" depends="compile">
+		<mkdir dir="${jar.dir}" />
+		<jar destfile="${jar.dir}/${jar.name}" basedir="${classes.dir}">
+			<zipgroupfileset dir="${lib.dir}" includes="**/*.jar" />
+			<manifest>
+				<attribute name="Main-Class" value="${main.class}" />
+				<attribute name="Class-Path" value="${classpath}" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="run" depends="build-jar">
+		<java jar="${jar.dir}/${jar.name}" fork="true"/>
+	</target>
+</project>

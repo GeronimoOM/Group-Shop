@@ -1,0 +1,12 @@
+# IDE-specific
+.idea
+.classpath
+.project
+Shop.iml
+
+# build
+build
+target
+
+#properties
+src/main/resources/properties/*.properties
