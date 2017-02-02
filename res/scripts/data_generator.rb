@@ -176,7 +176,7 @@ File.open('data.sql', 'w') do |file|
 	$purchases.each do |el|
 		file.write("INSERT INTO `sh_purchases` (`id`, `date`, `employee_id`) VALUES (#{el.instance_variable_get(:@id)}, '#{el.instance_variable_get(:@date)}', #{el.instance_variable_get(:@employee_id)});\n")
 		el.instance_variable_get(:@items).each do |item|
-			file.write("INSERT INTO `sh_purchases_items` (`supply_id`, `item_id`, `amount`) VALUES (#{item[:purchase_id]}, #{item[:item_id]}, #{item[:amount]});\n")
+			file.write("INSERT INTO `sh_purchases_items` (`purchase_id`, `item_id`, `amount`) VALUES (#{item[:purchase_id]}, #{item[:item_id]}, #{item[:amount]});\n")
 		end
 	end
 	file.write("\n")
