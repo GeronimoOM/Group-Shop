@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -53,17 +54,26 @@ public class EntityWindow extends BasicWindow
 		TableColumn column = new TableColumn(table_columns.size());
 		
 		column.setPreferredWidth(width);
-		column.setHeaderValue(name);
+		column.setHeaderValue(name.toUpperCase());
 		
 		table_column_model.addColumn(column);
-		table_model.addColumn(name);
+		table_model.addColumn(name.toUpperCase());
 		table_columns.add(column);
 
 		
 		JPanel entity_group = new JPanel(new GridLayout(2, 1));
-		
+
+		if (entity_fields.size() > 0)
+		{
+			JPanel filler = new JPanel();
+			filler.setMaximumSize(new Dimension(10, 1));
+			entity_panel.add(filler);
+		}
 		entity_panel.add(entity_group);
-		entity_group.add(new JLabel(name + ":"));
+		
+		JLabel text = new JLabel(name.toUpperCase() + ":");
+		text.setHorizontalAlignment(JLabel.CENTER);
+		entity_group.add(text);
 		
 		JTextField field = new JTextField(6);
 		entity_fields.add(field);
@@ -83,8 +93,6 @@ public class EntityWindow extends BasicWindow
 		controls_panel.add(actions_panel);
 		controls_panel.setLayout(new GridLayout(2, 1));
 		
-		entity_panel.setLayout(new GridLayout());
-
 		actions_panel.add(save_button);
 		
 		actions_panel.add(remove_button);
@@ -136,14 +144,14 @@ public class EntityWindow extends BasicWindow
 		this.add(scroll_pane, BorderLayout.CENTER);
 
 		this.add(controls_panel, BorderLayout.SOUTH);
-		entity_panel.setLayout(new GridLayout());
+		entity_panel.setLayout(new BoxLayout(entity_panel, BoxLayout.X_AXIS));
 		
 		this.setVisible(false);
 		this.setSize(800, 500);
 		this.setLocation(500, 20);
 		
 		// make rows selectable other than cells
-	    table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+	    table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 	    table.setColumnSelectionAllowed(true);
 	    table.setRowSelectionAllowed(false);

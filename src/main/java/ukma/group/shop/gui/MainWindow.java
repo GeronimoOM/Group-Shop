@@ -48,7 +48,7 @@ public class MainWindow extends BasicWindow
         });
 
         JPanel panel = new JPanel(new BorderLayout());
-        JLabel main_text = new JLabel("COOL TOY SHOP");
+        JLabel main_text = new JLabel("TOY SHOP");
         panel.add(main_text, BorderLayout.CENTER);
         main_text.setHorizontalAlignment(JLabel.CENTER);
         this.add(panel, BorderLayout.CENTER);
