@@ -17,9 +17,4 @@ public class ItemWindow extends EntityWindow {
 		add_entity_column("amount");
 		add_entity_column("department", 100);
 	}
-
-	public void add_item(Item item)
-	{
-		add_row(new Object[]{item.getId(), item.getName(), item.getPrice(), item.getAmount(), item.getDepartmentId()});
-	}
 }
