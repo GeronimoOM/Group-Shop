@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -30,7 +31,7 @@ import javax.swing.table.TableColumn;
  * use ItemWindow as a reference on how to properly extend this
  */
 
-public class EntityWindow extends BasicWindow 
+public abstract class EntityWindow<T> extends BasicWindow 
 {
 	DefaultTableModel table_model = new DefaultTableModel();
 	DefaultTableColumnModel table_column_model = new DefaultTableColumnModel();
@@ -45,19 +46,20 @@ public class EntityWindow extends BasicWindow
 	
 	private ArrayList<JTextField> entity_fields = new ArrayList<JTextField>();
 
-	public JButton save_button = new JButton("SAVE");
 	private JButton update_button = new JButton("Add/Update");
 	private JButton remove_button = new JButton("Remove");
 	
-	protected void add_entity_column(String name, int width)
+	protected EntityWindowAdapter<T> adapter;
+	
+	protected void add_entity_column(ColumnDefinition column_def)
 	{
 		TableColumn column = new TableColumn(table_columns.size());
 		
-		column.setPreferredWidth(width);
-		column.setHeaderValue(name.toUpperCase());
+		column.setPreferredWidth(column_def.getWidth());
+		column.setHeaderValue(column_def.getName().toUpperCase());
 		
 		table_column_model.addColumn(column);
-		table_model.addColumn(name.toUpperCase());
+		table_model.addColumn(column_def.getName().toUpperCase());
 		table_columns.add(column);
 
 		
@@ -71,7 +73,7 @@ public class EntityWindow extends BasicWindow
 		}
 		entity_panel.add(entity_group);
 		
-		JLabel text = new JLabel(name.toUpperCase() + ":");
+		JLabel text = new JLabel(column_def.getName().toUpperCase() + ":");
 		text.setHorizontalAlignment(JLabel.CENTER);
 		entity_group.add(text);
 		
@@ -80,20 +82,15 @@ public class EntityWindow extends BasicWindow
 		entity_group.add(field);
 	}
 
-	protected void add_entity_column(String name)
-	{
-		add_entity_column(name, 16);
-	}
-
-	public EntityWindow(String title) 
+	public EntityWindow(String title, List<ColumnDefinition> column_structure, final EntityWindowAdapter<T> adapter) 
 	{
 		super(title);
+		
+		this.adapter = adapter;
 		
 		controls_panel.add(entity_panel);
 		controls_panel.add(actions_panel);
 		controls_panel.setLayout(new GridLayout(2, 1));
-		
-		actions_panel.add(save_button);
 		
 		actions_panel.add(remove_button);
 		remove_button.addActionListener(new ActionListener() 
@@ -130,7 +127,7 @@ public class EntityWindow extends BasicWindow
 					ArrayList<Object> new_obj = new ArrayList<Object>();
 					for (int i = 0; i < entity_fields.size(); i ++)
 						new_obj.add(entity_fields.get(i).getText());
-					add_entity(new_obj.toArray());
+					add_entity(adapter.rowToEntity(new_obj.toArray()));
 				}
 			}
 		});
@@ -170,28 +167,30 @@ public class EntityWindow extends BasicWindow
 	        }
 	    });
 		
-	    // id is the default column since every entity has an id
-		add_entity_column("id");
+		for (ColumnDefinition column_def : column_structure)
+			add_entity_column(column_def);
 	}
 	
 	public void open()
 	{
-		update_table();
+		add_entities(adapter.load());
+		
 		this.setVisible(true);
 	}
 	
-	public void add_entity(Object[] data)
+	private void add_entity(T entity)
 	{
-		table_model.addRow(data);
+		table_model.addRow(adapter.entityToRow(entity));
+	}
+	
+	private void add_entities(List<T> entities)
+	{
+		for (T entity : entities)
+			add_entity(entity);
 	}
 	
 	public void add_button(JButton button)
 	{
 		actions_panel.add(button);
 	}
-
-	private void update_table()
-	{
-		
-	}	
 }

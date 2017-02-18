@@ -6,16 +6,27 @@ public class Item {
     private String name;
     private Long price;
     private Long amount;
-    private Long min_amount;
-    private Long department_id;
+    private Long minAmount;
+    private Long departmentId;
     
-    public Item(String name, Long price, Long amount, Long min_amount, Long department_id)
+    public Item(String name, Long price, Long amount, Long minAmount, Long departmentId)
     {
+    	this(null, name, price, amount, minAmount, departmentId);
+    }
+
+    public Item(Long id, String name, Long price, Long amount, Long minAmount, Long departmentId)
+    {
+    	this.setId(id);
     	this.setName(name);
     	this.setPrice(price);
     	this.setAmount(amount);
-    	this.setMin_amount(min_amount);
-    	this.setDepartmentId(department_id);
+    	this.setMinAmount(minAmount);
+    	this.setDepartmentId(departmentId);
+    }
+    
+    public Item()
+    {
+    	
     }
 
 	public Long getId() {
@@ -50,20 +61,20 @@ public class Item {
 		this.amount = amount;
 	}
 
-	public Long getMin_amount() {
-		return min_amount;
+	public Long getMinAmount() {
+		return minAmount;
 	}
 
-	public void setMin_amount(Long min_amount) {
-		this.min_amount = min_amount;
+	public void setMinAmount(Long minAmount) {
+		this.minAmount = minAmount;
 	}
 
 	public Long getDepartmentId() {
-		return department_id;
+		return departmentId;
 	}
 
-	public void setDepartmentId(Long department_id) {
-		this.department_id = department_id;
+	public void setDepartmentId(Long departmentId) {
+		this.departmentId = departmentId;
 	}
 
     @Override
@@ -73,12 +84,12 @@ public class Item {
 
         Item item = (Item) o;
 
-        return name.equals(item.name) && price == item.price && amount == item.amount && min_amount == item.min_amount && department_id == item.department_id;
+        return name.equals(item.name) && price == item.price && amount == item.amount && minAmount == item.minAmount && departmentId == item.departmentId;
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode() + price.hashCode() + amount.hashCode() + min_amount.hashCode() + department_id.hashCode();
+        return name.hashCode() + price.hashCode() + amount.hashCode() + minAmount.hashCode() + departmentId.hashCode();
     }
 
     @Override
@@ -88,8 +99,8 @@ public class Item {
         sb.append(", name='").append(name).append('\'');
         sb.append(", price='").append(price).append('\'');
         sb.append(", amount='").append(amount).append('\'');
-        sb.append(", min_amount='").append(min_amount).append('\'');
-        sb.append(", department_id='").append(department_id).append('\'');
+        sb.append(", minAmount='").append(minAmount).append('\'');
+        sb.append(", departmentId='").append(departmentId).append('\'');
         sb.append('}');
         return sb.toString();
     }

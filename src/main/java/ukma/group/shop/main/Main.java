@@ -3,11 +3,17 @@ package ukma.group.shop.main;
 import ukma.group.shop.dao.DaoManager;
 import ukma.group.shop.dao.SupplierDao;
 import ukma.group.shop.entity.Supplier;
+import ukma.group.shop.gui.ItemWindow;
+import ukma.group.shop.gui.MainWindow;
 
 public class Main {
 
 	public static void main(String[] args) {
 		daoExample();
+		
+		MainWindow main_window = new MainWindow();
+		ItemWindow item_window = new ItemWindow();
+		main_window.item_window = item_window;
 
 		System.out.println("Thanks, mr.Skeletal");
 	}
