@@ -1,6 +1,7 @@
 package ukma.group.shop.gui;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 
 import javax.swing.JMenu;
@@ -22,7 +23,12 @@ public class MainWindow extends BasicWindow
 		
 		JMenu operate_menu = new JMenu("Operate");
 		JMenuItem op_items = new JMenuItem("Items");
-		op_items.addActionListener((ActionEvent event) -> { item_window.open(); });
+		op_items.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				item_window.open();
+			}
+		});
 		operate_menu.add(op_items);
 		menubar.add(operate_menu);
 		
