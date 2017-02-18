@@ -1,12 +1,15 @@
 package ukma.group.shop.gui;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import com.sun.glass.events.WindowEvent;
@@ -30,10 +33,13 @@ public class MainWindow extends BasicWindow
 			}
 		});
 		operate_menu.add(op_items);
+		JMenuItem op_deps = new JMenuItem("Departments");
+		operate_menu.add(op_deps);
+		JMenuItem op_suppliers = new JMenuItem("Suppliers");
+		operate_menu.add(op_suppliers);
 		menubar.add(operate_menu);
 		
         this.setJMenuBar(menubar);
-		this.setSize(300, 300);
 		this.setLocation(20, 20);
 
         // close program on main window close
@@ -46,6 +52,14 @@ public class MainWindow extends BasicWindow
         		System.exit(0); 
         	}        
         });
+
+        JPanel panel = new JPanel(new BorderLayout());
+        JLabel main_text = new JLabel("TOY SHOP");
+        panel.add(main_text, BorderLayout.CENTER);
+        main_text.setHorizontalAlignment(JLabel.CENTER);
+        this.add(panel, BorderLayout.CENTER);
+
+		this.setSize(300, 200);
 	}
 
 }

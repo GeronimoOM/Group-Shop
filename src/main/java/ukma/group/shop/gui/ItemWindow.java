@@ -12,14 +12,9 @@ public class ItemWindow extends EntityWindow {
 		super("Items");
 
 		// add columns for the main table and specify some of the widths
-		add_entity_column("name", 100);
+		add_entity_column("name", 200);
 		add_entity_column("price");
 		add_entity_column("amount");
-		add_entity_column("department", 100);
-	}
-
-	public void add_item(Item item)
-	{
-		add_row(new Object[]{item.getId(), item.getName(), item.getPrice(), item.getAmount(), item.getDepartmentId()});
+		add_entity_column("department", 200);
 	}
 }
