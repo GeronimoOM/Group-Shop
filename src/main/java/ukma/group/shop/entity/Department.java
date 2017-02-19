@@ -50,10 +50,10 @@ public class Department {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Item{");
-        sb.append("id=").append(id);
-        sb.append(", name='").append(name).append('\'');
-        sb.append('}');
-        return sb.toString();
+        //final StringBuilder sb = new StringBuilder("Item{");
+        //sb.append("id=").append(id);
+        //sb.append(", name='").append(name).append('\'');
+        //sb.append('}');
+        return name;//sb.toString();
     }
 }

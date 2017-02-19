@@ -7,21 +7,21 @@ public class Item {
     private Long price;
     private Long amount;
     private Long minAmount;
-    private Long departmentId;
+    private Department department;
     
-    public Item(String name, Long price, Long amount, Long minAmount, Long departmentId)
+    public Item(String name, Long price, Long amount, Long minAmount, Department department)
     {
-    	this(null, name, price, amount, minAmount, departmentId);
+    	this(null, name, price, amount, minAmount, department);
     }
 
-    public Item(Long id, String name, Long price, Long amount, Long minAmount, Long departmentId)
+    public Item(Long id, String name, Long price, Long amount, Long minAmount, Department department)
     {
     	this.setId(id);
     	this.setName(name);
     	this.setPrice(price);
     	this.setAmount(amount);
     	this.setMinAmount(minAmount);
-    	this.setDepartmentId(departmentId);
+    	this.setDepartment(department);
     }
     
     public Item()
@@ -69,12 +69,12 @@ public class Item {
 		this.minAmount = minAmount;
 	}
 
-	public Long getDepartmentId() {
-		return departmentId;
+	public Department getDepartment() {
+		return department;
 	}
 
-	public void setDepartmentId(Long departmentId) {
-		this.departmentId = departmentId;
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 
     @Override
@@ -84,12 +84,12 @@ public class Item {
 
         Item item = (Item) o;
 
-        return name.equals(item.name) && price == item.price && amount == item.amount && minAmount == item.minAmount && departmentId == item.departmentId;
+        return name.equals(item.name) && price == item.price && amount == item.amount && minAmount == item.minAmount && department == item.department;
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode() + price.hashCode() + amount.hashCode() + minAmount.hashCode() + departmentId.hashCode();
+        return name.hashCode() + price.hashCode() + amount.hashCode() + minAmount.hashCode() + department.hashCode();
     }
 
     @Override
@@ -100,7 +100,7 @@ public class Item {
         sb.append(", price='").append(price).append('\'');
         sb.append(", amount='").append(amount).append('\'');
         sb.append(", minAmount='").append(minAmount).append('\'');
-        sb.append(", departmentId='").append(departmentId).append('\'');
+        sb.append(", department='").append(department).append('\'');
         sb.append('}');
         return sb.toString();
     }

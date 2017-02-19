@@ -9,6 +9,7 @@ import javax.swing.table.TableColumnModel;
 
 import ukma.group.shop.dao.DaoManager;
 import ukma.group.shop.dao.ItemDao;
+import ukma.group.shop.entity.Department;
 import ukma.group.shop.entity.Item;
 
 public class ItemWindow extends EntityWindow<Item> {
@@ -19,12 +20,12 @@ public class ItemWindow extends EntityWindow<Item> {
 		
 		@Override
 		public Item rowToEntity(Object[] row) {
-			return new Item((Long)row[0], (String)row[1], (Long)row[2], (Long)row[3], (Long)row[4], (Long)row[5]);
+			return new Item((Long)row[0], (String)row[1], Long.valueOf((String)row[2]), Long.valueOf((String)row[3]), Long.valueOf((String)row[4]), (Department)row[5]);
 		}
 
 		@Override
 		public Object[] entityToRow(Item entity) {
-			return new Object[]{ entity.getId(), entity.getName(), entity.getPrice(), entity.getAmount(), entity.getMinAmount(), entity.getDepartmentId() };
+			return new Object[]{ entity.getId(), entity.getName(), entity.getPrice(), entity.getAmount(), entity.getMinAmount(), entity.getDepartment() };
 		}
 		
 		@Override
@@ -53,12 +54,12 @@ public class ItemWindow extends EntityWindow<Item> {
 		super(
 			"Items", 
 			Arrays.asList(
-						new ColumnDefinition("id"),
+						new ColumnDefinition(false, "id"),
 						new ColumnDefinition("name", 200),
 						new ColumnDefinition("price"),
 						new ColumnDefinition("amount"),
 						new ColumnDefinition("min. amount"),
-						new ColumnDefinition("department", 200)
+						new ColumnDefinition("department", 200, DaoManager.getInstance().getDepartmentDao().findAll().toArray())
 						), 
 			new ItemEntityWindowAdapter());
 	}
