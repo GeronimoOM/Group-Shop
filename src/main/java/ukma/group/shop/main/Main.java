@@ -11,9 +11,7 @@ public class Main {
 	public static void main(String[] args) {
 		daoExample();
 		
-		MainWindow main_window = new MainWindow();
-		ItemWindow item_window = new ItemWindow();
-		main_window.item_window = item_window;
+		MainWindow main_window = MainWindow.getInstance();
 
 		System.out.println("Thanks, mr.Skeletal");
 	}

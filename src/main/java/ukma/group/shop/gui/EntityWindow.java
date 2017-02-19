@@ -52,10 +52,11 @@ public abstract class EntityWindow<T> extends BasicWindow
 	private JButton remove_button = new JButton("Remove");
 	
 	private Long selectedId = null;
+	private List<T> selectionList = new ArrayList<T>();
 	
 	protected EntityWindowAdapter<T> adapter;
 	
-	protected void add_entity_column(ColumnDefinition column_def)
+	protected void addEntityColumn(ColumnDefinition column_def)
 	{
 		TableColumn column = new TableColumn(table_columns.size());
 		
@@ -130,6 +131,16 @@ public abstract class EntityWindow<T> extends BasicWindow
 				selectedId = null;
 			}
 		});
+
+		JButton show_button = new JButton("YO");
+		actions_panel.add(show_button);
+		show_button.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				System.out.print(getSelected());
+			}
+		});
 		
 		actions_panel.add(update_button);
 		update_button.addActionListener(new ActionListener() 
@@ -167,7 +178,7 @@ public abstract class EntityWindow<T> extends BasicWindow
 						if (entity_select_fields.get(i) != null)
 							new_obj.add(entity_select_fields.get(i).getSelectedItem());
 					}
-					add_entity(adapter.rowToEntity(new_obj.toArray()));
+					addEntity(adapter.rowToEntity(new_obj.toArray()));
 				}
 			}
 		});
@@ -190,15 +201,24 @@ public abstract class EntityWindow<T> extends BasicWindow
 		// make rows selectable other than cells
 	    table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-	    table.setColumnSelectionAllowed(true);
-	    table.setRowSelectionAllowed(false);
-
 	    table.setColumnSelectionAllowed(false);
 	    table.setRowSelectionAllowed(true);
 	    
-	    table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-	        public void valueChanged(ListSelectionEvent event) {
-	        	if (table.getSelectedRow() != -1)
+	    table.getSelectionModel().addListSelectionListener(new ListSelectionListener()
+	    {
+	        public void valueChanged(ListSelectionEvent event) 
+	        {
+	        	if (table.getSelectedRowCount() > 0)
+	        	{
+	        		selectionList.clear();
+	        		for (int i = 0; i < table.getSelectedRowCount(); i ++)
+	        		{
+	        			List<Object> new_obj = new ArrayList<>();
+						for (int j = 0; j < table.getColumnCount(); j ++)
+							new_obj.add(table.getValueAt(table.getSelectedRows()[i], j));
+	        			selectionList.add(adapter.rowToEntity(new_obj.toArray()));
+	        		}
+	        		
 		        	for (int i = 0; i < entity_fields_amount; i ++)
 		        	{
 		        		Object val = table.getValueAt(table.getSelectedRow(), i);
@@ -209,33 +229,76 @@ public abstract class EntityWindow<T> extends BasicWindow
 		        		
 		        		selectedId = (Long)table.getValueAt(table.getSelectedRow(), 0);
 		        	}
+	        	}
+	        	else
+	        	{
+		        	for (int i = 0; i < entity_fields_amount; i ++)
+		        		if (entity_text_fields.get(i) != null)
+		        			entity_text_fields.get(i).setText("");
+	        		selectedId = null;
+	        	}
 	        }
 	    });
 		
 		for (ColumnDefinition column_def : column_structure)
-			add_entity_column(column_def);
+			addEntityColumn(column_def);
 	}
 	
 	public void open()
 	{
-		add_entities(adapter.load());
+		addEntities(adapter.load());
 		
 		this.setVisible(true);
 	}
 	
-	private void add_entity(T entity)
+	public void close()
+	{
+		this.setVisible(false);
+	}
+	
+	private void addEntity(T entity)
 	{
 		table_model.addRow(adapter.entityToRow(entity));
 	}
 	
-	private void add_entities(List<T> entities)
+	private void addEntities(List<T> entities)
 	{
 		for (T entity : entities)
-			add_entity(entity);
+			addEntity(entity);
 	}
 	
-	public void add_button(JButton button)
+	private void clearEntities()
+	{
+		for (int i = 0; i < table.getRowCount(); i ++)
+			table_model.removeRow(i);
+	}
+	
+	public void addButton(JButton button)
 	{
 		actions_panel.add(button);
+	}
+
+	public void setEntities(List<T> entities)
+	{
+		clearEntities();
+		addEntities(entities);
+	}
+	
+	public void setSelectionMode(boolean multipleAllowed)
+	{
+		if (multipleAllowed)
+		    table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		else
+			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	}
+	
+	public List<T> getSelected()
+	{
+		return selectionList;
+	}
+	
+	public void setHeaderPanel(JPanel header)
+	{
+		this.add(header, BorderLayout.NORTH);
 	}
 }

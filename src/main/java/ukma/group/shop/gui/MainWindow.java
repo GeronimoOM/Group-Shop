@@ -14,13 +14,21 @@ import javax.swing.WindowConstants;
 
 import com.sun.glass.events.WindowEvent;
 
+import ukma.group.shop.dao.DaoManager;
+
 public class MainWindow extends BasicWindow 
 {
+    private static MainWindow instance = new MainWindow();
+	
 	private JMenuBar menubar = new JMenuBar();
 	
-	public ItemWindow item_window;
+	private ItemWindow itemWindow = new ItemWindow();
 	
-	public MainWindow()
+    public static MainWindow getInstance() {
+        return instance;
+    }
+	
+	private MainWindow()
 	{
 		super("MAIN");
 		
@@ -29,7 +37,7 @@ public class MainWindow extends BasicWindow
 		op_items.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				item_window.open();
+				itemWindow.open();
 			}
 		});
 		operate_menu.add(op_items);
@@ -60,6 +68,14 @@ public class MainWindow extends BasicWindow
         this.add(panel, BorderLayout.CENTER);
 
 		this.setSize(300, 200);
+	}
+
+	public ItemWindow getItemWindow() {
+		return itemWindow;
+	}
+
+	public void setItemWindow(ItemWindow itemWindow) {
+		this.itemWindow = itemWindow;
 	}
 
 }

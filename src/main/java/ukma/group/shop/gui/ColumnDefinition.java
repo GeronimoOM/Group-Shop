@@ -25,7 +25,7 @@ public class ColumnDefinition
 		this(true, name, width, null);
 	}
 
-	public ColumnDefinition(boolean editable, String name)
+	public ColumnDefinition(String name, boolean editable)
 	{
 		this(editable, name, 16, null);
 	}

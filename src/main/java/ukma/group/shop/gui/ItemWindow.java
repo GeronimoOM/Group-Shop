@@ -20,7 +20,13 @@ public class ItemWindow extends EntityWindow<Item> {
 		
 		@Override
 		public Item rowToEntity(Object[] row) {
-			return new Item((Long)row[0], (String)row[1], Long.valueOf((String)row[2]), Long.valueOf((String)row[3]), Long.valueOf((String)row[4]), (Department)row[5]);
+			Long id = (Long)row[0];
+			String name = (String)row[1];
+			Long price = (Long)row[2];
+			Long amount = (Long)row[3];
+			Long min_amount = (Long)row[4];
+			Department dep = (Department)row[5];
+			return new Item(id, name, price, amount, min_amount, dep);
 		}
 
 		@Override
@@ -54,7 +60,7 @@ public class ItemWindow extends EntityWindow<Item> {
 		super(
 			"Items", 
 			Arrays.asList(
-						new ColumnDefinition(false, "id"),
+						new ColumnDefinition("id", false),
 						new ColumnDefinition("name", 200),
 						new ColumnDefinition("price"),
 						new ColumnDefinition("amount"),
