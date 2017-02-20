@@ -1,11 +1,17 @@
 package ukma.group.shop.entity;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Supply {
+
     private Long id;
+
     private Timestamp date;
+
     private Supplier supplier;
+
+    private List<SuppliesItem> items;
 
     public Supply() {}
 
@@ -33,12 +39,5 @@ public class Supply {
         this.supplier = supplier;
     }
 
-    @Override
-    public String toString() {
-        return "Supply{" +
-                "id=" + id +
-                ", date=" + date +
-                ", supplier=" + supplier +
-                '}';
-    }
+
 }

@@ -4,11 +4,9 @@ package ukma.group.shop.dao.impl;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import ukma.group.shop.dao.DaoException;
-import ukma.group.shop.dao.LongHandler;
 import ukma.group.shop.dao.SuppliesItemDao;
-import ukma.group.shop.dao.SuppliesItemKey;
+import ukma.group.shop.entity.pojo.SuppliesItemKey;
 import ukma.group.shop.entity.Item;
-import ukma.group.shop.entity.Supplier;
 import ukma.group.shop.entity.SuppliesItem;
 import ukma.group.shop.entity.Supply;
 

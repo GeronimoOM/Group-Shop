@@ -2,21 +2,12 @@ package ukma.group.shop.entity;
 
 
 public class SuppliesItem {
-    private Supply supply;
+
     private Item item;
     private int amount;
     private double price;
 
-    public SuppliesItem() {
-    }
-
-    public Supply getSupply() {
-        return supply;
-    }
-
-    public void setSupply(Supply supply) {
-        this.supply = supply;
-    }
+    public SuppliesItem() {}
 
     public Item getItem() {
         return item;
@@ -42,13 +33,4 @@ public class SuppliesItem {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "SuppliesItem{" +
-                "supply=" + supply +
-                ", item=" + item +
-                ", amount=" + amount +
-                ", price=" + price +
-                '}';
-    }
 }

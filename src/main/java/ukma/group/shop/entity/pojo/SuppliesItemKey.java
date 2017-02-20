@@ -1,4 +1,4 @@
-package ukma.group.shop.dao;
+package ukma.group.shop.entity.pojo;
 
 public class SuppliesItemKey {
 

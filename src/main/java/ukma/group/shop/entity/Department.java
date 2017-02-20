@@ -4,16 +4,12 @@ public class Department {
 	
 	private Long id;
 	private String name;
+
+	public Department() {}
 	
-	public Department(Long id, String name)
-	{
+	public Department(Long id, String name) {
 		this.setId(id);
 		this.setName(name);
-	}
-	
-	public Department(String name)
-	{
-		this(null, name);
 	}
 
 	public Long getId() {
