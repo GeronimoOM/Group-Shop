@@ -19,7 +19,7 @@ public class SuppliesItemDaoImpl implements SuppliesItemDao {
 
     private static final String SQL_SELECT_SUPPLIES_ITEMS = "SELECT * FROM sh_supplies_items s";
     private static final String SQL_SELECT_SUPPLIES_ITEM_BY_ID = SQL_SELECT_SUPPLIES_ITEMS + " WHERE supply_id = ? and item_id = ?";
-    private static final String SQL_INSERT_SUPPLIES_ITEM =  "INSERT INTO sh_supplies_items (amount, price) VALUES (?, ?)";
+    private static final String SQL_INSERT_SUPPLIES_ITEM =  "INSERT INTO sh_supplies_items (supply_id, item_id, amount, price) VALUES (?,?,?,?)";
     private static final String SQL_UPDATE_SUPPLIES_ITEM = "UPDATE sh_supplies_items SET amount = ?, price = ? WHERE supply_id = ? and item_id = ?";
     private static final String SQL_DELETE_SUPPLIES_ITEM = "DELETE FROM sh_supplies_items WHERE supply_id = ? and item_id = ?";
 
@@ -56,21 +56,13 @@ public class SuppliesItemDaoImpl implements SuppliesItemDao {
     @Override
     public void persist(SuppliesItem suppliesItem) {
         try {
-            SuppliesItemKey key = queryRunner.insert(
+            queryRunner.update(
                     SQL_INSERT_SUPPLIES_ITEM,
-                    SUPPLIES_ITEM_KEY_RESULT_SET_HANDLER,
+                    suppliesItem.getSupply().getId(),
+                    suppliesItem.getItem().getId(),
                     suppliesItem.getAmount(),
                     suppliesItem.getPrice()
             );
-
-            Supply supply = new Supply();
-            supply.setId(key.getSupplyId());
-            suppliesItem.setSupply(supply);
-
-            Item item = new Item();
-            item.setId(key.getItemId());
-            suppliesItem.setItem(item);
-
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -123,14 +115,6 @@ public class SuppliesItemDaoImpl implements SuppliesItemDao {
         }
 
 
-    };
-
-    private static final ResultSetHandler<SuppliesItemKey> SUPPLIES_ITEM_KEY_RESULT_SET_HANDLER = new ResultSetHandler<SuppliesItemKey>() {
-
-        @Override
-        public SuppliesItemKey handle(ResultSet rs) throws SQLException {
-            return new SuppliesItemKey(rs.getLong("supplier_id"), rs.getLong("item_id"));
-        }
     };
 
 
