@@ -2,9 +2,7 @@ package ukma.group.shop.dao;
 
 import org.apache.commons.dbutils.QueryRunner;
 
-import ukma.group.shop.dao.impl.DepartmentDaoImpl;
-import ukma.group.shop.dao.impl.ItemDaoImpl;
-import ukma.group.shop.dao.impl.SupplierDaoImpl;
+import ukma.group.shop.dao.impl.*;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -25,6 +23,8 @@ public class DaoManager {
     private SupplierDao supplierDao;
     private ItemDao itemDao;
     private DepartmentDao departmentDao;
+    private SupplyDao supplyDao;
+    private SuppliesItemDao suppliesItemDao;
     //other dao
 
     public static DaoManager getInstance() {
@@ -72,5 +72,17 @@ public class DaoManager {
         return departmentDao;
     }
 
+    public SupplyDao getSupplyDao() {
+        if(supplyDao == null) {
+            supplyDao = new SupplyDaoImpl(queryRunner);
+        }
+        return supplyDao;
+    }
 
+    public SuppliesItemDao getSuppliesItemDao() {
+        if(suppliesItemDao == null) {
+            suppliesItemDao = new SuppliesItemDaoImpl(queryRunner);
+        }
+        return suppliesItemDao;
+    }
 }
