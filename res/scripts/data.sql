@@ -191,7 +191,6 @@ INSERT INTO `sh_orders_items` (`order_id`, `item_id`, `amount`) VALUES (49, 25, 
 INSERT INTO `sh_orders_items` (`order_id`, `item_id`, `amount`) VALUES (49, 14, 43);
 INSERT INTO `sh_orders` (`id`, `date`, `supplier_id`, `employee_id`, `supply_id`) VALUES (50, '2016-09-02', 6, 9, 121);
 INSERT INTO `sh_orders_items` (`order_id`, `item_id`, `amount`) VALUES (50, 9, 35);
-INSERT INTO `sh_orders_items` (`order_id`, `item_id`, `amount`) VALUES (50, 9, 55);
 INSERT INTO `sh_orders` (`id`, `date`, `supplier_id`, `employee_id`, `supply_id`) VALUES (51, '2016-11-23', 8, 8, 533);
 INSERT INTO `sh_orders_items` (`order_id`, `item_id`, `amount`) VALUES (51, 14, 59);
 INSERT INTO `sh_orders` (`id`, `date`, `supplier_id`, `employee_id`, `supply_id`) VALUES (52, '2016-07-04', 2, 9, 384);
@@ -255,7 +254,6 @@ INSERT INTO `sh_supplies` (`id`, `date`, `supplier_id`) VALUES (110, '2016-06-25
 INSERT INTO `sh_supplies_items` (`supply_id`, `item_id`, `amount`, `price`) VALUES (110, 12, 51, 76);
 INSERT INTO `sh_supplies` (`id`, `date`, `supplier_id`) VALUES (121, '2016-05-07', 6);
 INSERT INTO `sh_supplies_items` (`supply_id`, `item_id`, `amount`, `price`) VALUES (121, 9, 35, 79);
-INSERT INTO `sh_supplies_items` (`supply_id`, `item_id`, `amount`, `price`) VALUES (121, 9, 55, 85);
 INSERT INTO `sh_supplies` (`id`, `date`, `supplier_id`) VALUES (127, '2016-09-20', 4);
 INSERT INTO `sh_supplies_items` (`supply_id`, `item_id`, `amount`, `price`) VALUES (127, 16, 44, 14);
 INSERT INTO `sh_supplies` (`id`, `date`, `supplier_id`) VALUES (163, '2016-10-13', 9);
@@ -356,7 +354,6 @@ INSERT INTO `sh_supplies_items` (`supply_id`, `item_id`, `amount`, `price`) VALU
 
 INSERT INTO `sh_purchases` (`id`, `date`, `employee_id`) VALUES (1, '2016-04-12', 16);
 INSERT INTO `sh_purchases_items` (`purchase_id`, `item_id`, `amount`) VALUES (1, 3, 3);
-INSERT INTO `sh_purchases_items` (`purchase_id`, `item_id`, `amount`) VALUES (1, 3, 1);
 INSERT INTO `sh_purchases` (`id`, `date`, `employee_id`) VALUES (2, '2017-01-22', 12);
 INSERT INTO `sh_purchases_items` (`purchase_id`, `item_id`, `amount`) VALUES (2, 14, 2);
 INSERT INTO `sh_purchases` (`id`, `date`, `employee_id`) VALUES (3, '2016-09-12', 5);

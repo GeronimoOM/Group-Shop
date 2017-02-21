@@ -78,10 +78,10 @@ CREATE TABLE `sh_items` (
   `price` decimal(12,2) NOT NULL,
   `amount` int(11) NOT NULL,
   `min_amount` int(11) NOT NULL,
-  `deparment_id` bigint(20) NOT NULL,
+  `department_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `deparment_id` (`deparment_id`),
-  CONSTRAINT `fk_items_department_id` FOREIGN KEY (`deparment_id`) REFERENCES `sh_departments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `department_id` (`department_id`),
+  CONSTRAINT `fk_items_department_id` FOREIGN KEY (`department_id`) REFERENCES `sh_departments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
