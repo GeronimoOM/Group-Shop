@@ -14,7 +14,20 @@ public class Order {
 
     private Employee employee;
 
-    public Long getId() {
+	public Order() {
+		super();
+	}
+
+	public Order(Long id, Date date, Supplier supplier, Supply supply, Employee employee) {
+		super();
+		this.id = id;
+		this.date = date;
+		this.supplier = supplier;
+		this.supply = supply;
+		this.employee = employee;
+	}
+
+	public Long getId() {
         return id;
     }
 

@@ -53,6 +53,14 @@ public class MainWindow extends BasicWindow {
             }
         });
         operate_menu.add(op_supplies);
+	JMenuItem opOrder = new JMenuItem("Make Order");
+	opOrder.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			orderWindow.open();
+		}
+	});
+	operate_menu.add(opOrder);
         menubar.add(operate_menu);
 
         this.setJMenuBar(menubar);
@@ -80,9 +88,16 @@ public class MainWindow extends BasicWindow {
         return itemWindow;
     }
 
-    public void setItemWindow(ItemWindow itemWindow) {
-        this.itemWindow = itemWindow;
-    }
+	public void setItemWindow(ItemWindow itemWindow) {
+		this.itemWindow = itemWindow;
+	}
+	public OrderWindow getOrderWindow() {
+		return orderWindow;
+	}
+
+	public void setOrderWindow(OrderWindow orderWindow) {
+		this.orderWindow = orderWindow;
+	}
 
     public SupplyWindow getSupplyWindow() {
         return supplyWindow;

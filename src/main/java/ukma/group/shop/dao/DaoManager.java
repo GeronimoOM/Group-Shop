@@ -25,6 +25,7 @@ public class DaoManager {
     private DepartmentDao departmentDao;
     private SupplyDao supplyDao;
     private SuppliesItemDao suppliesItemDao;
+    private OrderDao orderDao;
     //other dao
 
     public static DaoManager getInstance() {
@@ -84,5 +85,11 @@ public class DaoManager {
             suppliesItemDao = new SuppliesItemDaoImpl(queryRunner);
         }
         return suppliesItemDao;
+    }
+    public OrderDao getOrderDao() {
+        if(orderDao == null) {
+            orderDao = new OrderDaoImpl(queryRunner);
+        }
+        return orderDao;
     }
 }

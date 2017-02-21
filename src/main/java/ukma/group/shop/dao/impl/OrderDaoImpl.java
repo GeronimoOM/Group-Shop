@@ -16,7 +16,7 @@ import java.util.List;
 
 public class OrderDaoImpl implements OrderDao {
 
-    private static final String SQL_SELECT_ORDERS = "SELECT e.id AS e_id, date, employee_id, supplier_id, supply_id, e.name AS e_name, s.name AS s_name" +
+    private static final String SQL_SELECT_ORDERS = "SELECT e.id AS e_id, date, employee_id, supplier_id, supply_id, e.name AS e_name, s.name AS s_name " +
             "FROM sh_orders o INNER JOIN sh_employees e ON o.employee_id=e.id INNER JOIN sh_suppliers s ON o.supplier_id=s.id";
     private static final String SQL_INSERT_ORDER = "INSERT INTO sh_orders (date, employee_id, supplier_id) VALUES (?, ?, ?)";
     private static final String SQL_UPDATE_ORDER = "UPDATE sh_orders SET supply_id=? WHERE id=?";
