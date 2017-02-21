@@ -15,7 +15,7 @@ class Employee
 	end
 end
 $employees = []
-16.times { $employees.push(Employee.new) }
+4.times { $employees.push(Employee.new) }
 
 $suppliers_amount = 0
 class Supplier
@@ -27,7 +27,7 @@ class Supplier
 	end
 end
 $suppliers = []
-16.times { $suppliers.push(Supplier.new) }
+4.times { $suppliers.push(Supplier.new) }
 
 $items_amount = 0
 class Item
@@ -51,7 +51,7 @@ class Item
 	end
 end
 $items = []
-32.times { $items.push(Item.new) }
+8.times { $items.push(Item.new) }
 
 $orders_amount = 0
 class Order
@@ -69,7 +69,9 @@ class Order
 		amount = rand(1..2)
 		amount.times do
 			new_item = { order_id: @id, item_id: rand(1..$items_amount), amount: rand(32..64) }
-			@items.push(new_item)
+			found = false
+			@items.each { |item| found = true if new_item.instance_variable_get(:@id) == item.instance_variable_get(:@id) }
+			@items.push(new_item) if not found
 		end
 	end
 
@@ -78,7 +80,7 @@ class Order
 	end
 end
 $orders = []
-64.times { $orders.push(Order.new) }
+8.times { $orders.push(Order.new) }
 
 $supplies_amount = 0
 class Supply
@@ -100,7 +102,9 @@ class Supply
 			order.instance_variable_get(:@items).each do |order_item|
 				new_item = { supply_id: @id, item_id: order_item[:item_id], amount: order_item[:amount], price: rand(10..100) }
 				($items.find_all { |item| item.instance_variable_get(:@id) == new_item[:item_id] })[0].add(new_item[:amount])
-				@items.push(new_item)
+				found = false
+				@items.each { |item| found = true if new_item.instance_variable_get(:@id) == item.instance_variable_get(:@id) }
+				@items.push(new_item) if not found
 			end
 		end
 	end
@@ -110,7 +114,7 @@ class Supply
 	end
 end
 $supplies = []
-1024.times { $supplies.push(Supply.new) }
+32.times { $supplies.push(Supply.new) }
 $supplies.delete_if { |supply| supply.empty? }
 
 
@@ -132,7 +136,9 @@ class Purchase
 			new_item[:amount] = $items[item_i].instance_variable_get(:@amount).to_i if new_item[:amount] > $items[item_i].instance_variable_get(:@amount).to_i
 			next if new_item[:amount] == 0
 			($items.find_all { |item| item.instance_variable_get(:@id) == new_item[:item_id] })[0].remove(new_item[:amount])
-			@items.push(new_item)
+			found = false
+			@items.each { |item| found = true if new_item.instance_variable_get(:@id) == item.instance_variable_get(:@id) }
+			@items.push(new_item) if not found
 		end
 	end
 
@@ -141,7 +147,7 @@ class Purchase
 	end
 end
 $purchases = []
-1024.times { $purchases.push(Purchase.new) }
+16.times { $purchases.push(Purchase.new) }
 $purchases.delete_if { |purchase| purchase.empty? }
 
 File.open('data.sql', 'w') do |file|
