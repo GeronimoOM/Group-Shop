@@ -16,49 +16,55 @@ import com.sun.glass.events.WindowEvent;
 
 import ukma.group.shop.dao.DaoManager;
 
-public class MainWindow extends BasicWindow 
-{
+public class MainWindow extends BasicWindow {
     private static MainWindow instance = new MainWindow();
-	
-	private JMenuBar menubar = new JMenuBar();
-	
-	private ItemWindow itemWindow = new ItemWindow();
-	
+
+    private JMenuBar menubar = new JMenuBar();
+
+    private ItemWindow itemWindow = new ItemWindow();
+
+    private SupplyWindow supplyWindow = new SupplyWindow();
+
     public static MainWindow getInstance() {
         return instance;
     }
-	
-	private MainWindow()
-	{
-		super("MAIN");
-		
-		JMenu operate_menu = new JMenu("Operate");
-		JMenuItem op_items = new JMenuItem("Items");
-		op_items.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				itemWindow.open();
-			}
-		});
-		operate_menu.add(op_items);
-		JMenuItem op_deps = new JMenuItem("Departments");
-		operate_menu.add(op_deps);
-		JMenuItem op_suppliers = new JMenuItem("Suppliers");
-		operate_menu.add(op_suppliers);
-		menubar.add(operate_menu);
-		
+
+    private MainWindow() {
+        super("MAIN");
+
+        JMenu operate_menu = new JMenu("Operate");
+        JMenuItem op_items = new JMenuItem("Items");
+        op_items.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                itemWindow.open();
+            }
+        });
+        operate_menu.add(op_items);
+        JMenuItem op_deps = new JMenuItem("Departments");
+        operate_menu.add(op_deps);
+        JMenuItem op_suppliers = new JMenuItem("Suppliers");
+        operate_menu.add(op_suppliers);
+        JMenuItem op_supplies = new JMenuItem("Supplies");
+        op_supplies.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                supplyWindow.open();
+            }
+        });
+        operate_menu.add(op_supplies);
+        menubar.add(operate_menu);
+
         this.setJMenuBar(menubar);
-		this.setLocation(20, 20);
+        this.setLocation(20, 20);
 
         // close program on main window close
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.addWindowListener(new WindowAdapter() 
-        {
-        	@SuppressWarnings("unused")
-        	public void windowClosing(WindowEvent windowEvent) 
-        	{ 
-        		System.exit(0); 
-        	}        
+        this.addWindowListener(new WindowAdapter() {
+            @SuppressWarnings("unused")
+            public void windowClosing(WindowEvent windowEvent) {
+                System.exit(0);
+            }
         });
 
         JPanel panel = new JPanel(new BorderLayout());
@@ -67,15 +73,22 @@ public class MainWindow extends BasicWindow
         main_text.setHorizontalAlignment(JLabel.CENTER);
         this.add(panel, BorderLayout.CENTER);
 
-		this.setSize(300, 200);
-	}
+        this.setSize(300, 200);
+    }
 
-	public ItemWindow getItemWindow() {
-		return itemWindow;
-	}
+    public ItemWindow getItemWindow() {
+        return itemWindow;
+    }
 
-	public void setItemWindow(ItemWindow itemWindow) {
-		this.itemWindow = itemWindow;
-	}
+    public void setItemWindow(ItemWindow itemWindow) {
+        this.itemWindow = itemWindow;
+    }
 
+    public SupplyWindow getSupplyWindow() {
+        return supplyWindow;
+    }
+
+    public void setSupplyWindow(SupplyWindow supplyWindow) {
+        this.supplyWindow = supplyWindow;
+    }
 }

@@ -47,8 +47,8 @@ public class Main {
 		supply.setSupplier(supplier1);
 
 		/*supplyDao.persist(supply);
-		System.out.println(supply);
-
+		System.out.println(supply);*/
+/*
 		supply.setDate(Timestamp.valueOf("1658-12-23 13:33:24"));
 		supplyDao.update(supply);
 

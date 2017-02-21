@@ -11,9 +11,15 @@ public class Supply {
 
     private Supplier supplier;
 
-    private List<SuppliesItem> items;
+
 
     public Supply() {}
+
+    public Supply(Long id, Timestamp date, Supplier supplier) {
+        this.id = id;
+        this.date = date;
+        this.supplier = supplier;
+    }
 
     public Long getId() {
         return id;
@@ -39,5 +45,12 @@ public class Supply {
         this.supplier = supplier;
     }
 
-
+    @Override
+    public String toString() {
+        return "Supply{" +
+                "id=" + id +
+                ", date=" + date +
+                ", supplier=" + supplier +
+                '}';
+    }
 }
