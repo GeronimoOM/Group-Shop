@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 public class Main {
 
 	public static void main(String[] args) {
-		daoExample();
+	//	daoExample();
 
 		MainWindow main_window = MainWindow.getInstance();
 
@@ -36,7 +36,7 @@ public class Main {
 
 		supplierDao.delete(supplier.getId());
 
-		Supplier supplier1 = supplierDao.find(75l);
+	/*	Supplier supplier1 = supplierDao.find(75l);
 
 		SupplyDao supplyDao = DaoManager.getInstance().getSupplyDao();
 
@@ -46,9 +46,9 @@ public class Main {
 		supply.setDate(Timestamp.valueOf("1992-01-11 11:22:33"));
 		supply.setSupplier(supplier1);
 
-		/*supplyDao.persist(supply);
-		System.out.println(supply);*/
-/*
+		*//*supplyDao.persist(supply);
+		System.out.println(supply);*//*
+*//*
 		supply.setDate(Timestamp.valueOf("1658-12-23 13:33:24"));
 		supplyDao.update(supply);
 
@@ -56,7 +56,7 @@ public class Main {
 			 ) {
 			System.out.println(s);
 		}
-		supplyDao.delete(supply.getId());*/
+		supplyDao.delete(supply.getId());*//*
         Department department = new Department(1l,"name");
         ItemDao itemDao = DaoManager.getInstance().getItemDao();
         Item item = new Item(33l, "Black Dildo", 3l, 69l, 42l, department);
@@ -73,7 +73,7 @@ public class Main {
         suppliesItem.setSupply(supply);
         suppliesItem.setItem(item);
 
-        System.out.println(suppliesItemDao.find(new SuppliesItemKey(1L, 34L)));
+        System.out.println(suppliesItemDao.find(new SuppliesItemKey(1L, 34L)));*/
 
 
       /* suppliesItemDao.update(suppliesItem);

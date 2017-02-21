@@ -25,6 +25,8 @@ public class MainWindow extends BasicWindow {
 
     private SupplyWindow supplyWindow = new SupplyWindow();
 
+    private OrderWindow orderWindow = new OrderWindow();
+
     public static MainWindow getInstance() {
         return instance;
     }
@@ -91,6 +93,7 @@ public class MainWindow extends BasicWindow {
 	public void setItemWindow(ItemWindow itemWindow) {
 		this.itemWindow = itemWindow;
 	}
+
 	public OrderWindow getOrderWindow() {
 		return orderWindow;
 	}
@@ -106,4 +109,6 @@ public class MainWindow extends BasicWindow {
     public void setSupplyWindow(SupplyWindow supplyWindow) {
         this.supplyWindow = supplyWindow;
     }
+
+
 }
